@@ -6,7 +6,7 @@ const Layout = ({ children }) => {
   const router = useRouter();
 
   return (
-    <div className="bg-black text-white">
+    <div className="">
       {router.pathname !== "/[id]" && <Navigation />}
       {children}
     </div>

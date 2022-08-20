@@ -79,7 +79,7 @@ export const UserContextProvider = ({ children }) => {
   useEffect(() => {
     if (!account) return;
 
-    isNFTOwned(account, ALLOWLIST_CONTRACT).then((res) => setAllowlistNFT(res));
+    // isNFTOwned(account, ALLOWLIST_CONTRACT).then((res) => setAllowlistNFT(res));
   }, [account, library]);
 
   return (
@@ -94,7 +94,8 @@ export const UserContextProvider = ({ children }) => {
         isNFTOwned,
         allowlistNFT,
         isLoggedIn: !!account,
-      }}>
+      }}
+    >
       {isLoading ? <Loader /> : children}
     </UserContext.Provider>
   );
