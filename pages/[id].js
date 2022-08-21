@@ -6,7 +6,8 @@ import UserRegister from "../src/components/UserRegister";
 
 const UserRegisterPage = ({ data }) => (
   <div>
-    <p className='mt-2 text-2xl text-center text-black '>Allowlist</p>
+    <p className="mt-2 text-2xl text-center text-white">StakeLabs</p>
+    <p className="mt-2 text-sm text-center text-white">Support your favorite content creators</p>
     <UserRegister data={data} />
   </div>
 );
