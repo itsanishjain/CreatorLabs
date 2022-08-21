@@ -1,7 +1,7 @@
 import { collection, getDocs, query, where } from "firebase/firestore";
 
 import { db } from "../../../src/utils/firebase";
-import { redis, setKey } from "../../../src/utils/redis";
+import { redis } from "../../../src/utils/redis";
 
 const handler = async (req, res) => {
   const { account } = req.query;
