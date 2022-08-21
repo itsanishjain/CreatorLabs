@@ -20,7 +20,7 @@ const Tab = ({ tabName, data }) => {
 };
 
 const Settings = ({ data }) => {
-  const { isLoggedIn } = useContext(UserContext);
+  const { isLoggedIn, account } = useContext(UserContext);
 
   const [activeTab, setActiveTab] = useState("projectInfo");
 
@@ -29,7 +29,7 @@ const Settings = ({ data }) => {
   const getClassNames = (tabName) => {
     const tabClassName = {
       active:
-        "text-center block border border-orange-500 rounded py-2 px-4 bg-orange-500 hover:bg-orange-700 text-white",
+        "text-center block border border-green-500 rounded py-2 px-4 bg-green-500 hover:bg-green-700 text-white",
       inactive: "text-center text-black block rounded py-2 px-4",
     };
 
@@ -38,26 +38,30 @@ const Settings = ({ data }) => {
 
   useEffect(() => {
     if (!isLoggedIn) return router.push("/login");
-  }, [isLoggedIn, router]);
+    if (account !== data.creator) return router.push("/dashboard");
+  }, [account, data.creator, isLoggedIn, router]);
 
   return (
-    <div className='mt-8'>
-      <ul className='flex mb-8 max-w-3xl mx-auto '>
+    <div className="mt-8">
+      <ul className="flex mb-8 max-w-3xl mx-auto ">
         <li
           onClick={() => setActiveTab("projectInfo")}
-          className='flex-1 mr-2  cursor-pointer text-black'>
+          className="flex-1 mr-2  cursor-pointer text-black"
+        >
           <a className={getClassNames("projectInfo")}>Project Info</a>
         </li>
         <li
           onClick={() => setActiveTab("walletRequirement")}
-          className='flex-1 mr-2  cursor-pointer text-black'>
+          className="flex-1 mr-2  cursor-pointer text-black"
+        >
           <a className={getClassNames("walletRequirement")}>
             Wallet Requirements
           </a>
         </li>
         <li
           onClick={() => setActiveTab("registerUserList")}
-          className='flex-1 mr-2 cursor-pointer text-black'>
+          className="flex-1 mr-2 cursor-pointer text-black"
+        >
           <a className={getClassNames("registerUserList")}>Registered Users</a>
         </li>
       </ul>
