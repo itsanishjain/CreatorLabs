@@ -43,7 +43,7 @@ const Navigation = () => {
         <div className="flex items-center justify-between py-3 lg:py-4 lg:block">
           <Link href="/">
             <a className="mx-auto text-xl font-black leading-none text-gray-900 select-none flex">
-              <span>Allowlist</span>
+              <span className="text-green-500">StakeLabs</span>
             </a>
           </Link>
           <div className="lg:hidden">
@@ -94,7 +94,7 @@ const Navigation = () => {
                 <li className="mt-8 lg:mt-0 mb-8 lg:mb-0">
                   <Link href="/login">
                     <a
-                      className="py-3 px-4 text-center text-white bg-orange-500 hover:bg-orange-700 rounded-md shadow block lg:inline"
+                      className="py-3 px-4 text-center text-white bg-gradient-to-r from-green-400 to-green-600 rounded-md shadow block lg:inline"
                       onClick={handleToggle}
                     >
                       Login

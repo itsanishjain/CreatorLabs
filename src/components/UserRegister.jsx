@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext, useCallback } from "react";
 import Image from "next/image";
 import axios from "axios";
 import { useRouter } from "next/router";
@@ -36,7 +36,7 @@ const UserRegister = ({ data }) => {
 
   const router = useRouter();
 
-  const hasEnoughETH = async () => {
+  const hasEnoughETH = useCallback(async () => {
     if (chainId == 4 && library.connection.url != "metamask") {
       library.provider.http.connection.url = INFURA_RINKEBY_URL;
     }
@@ -46,21 +46,27 @@ const UserRegister = ({ data }) => {
     let balance = await web3Provider.getBalance(account);
 
     return parseFloat(data.ethAmount) <= parseFloat(utils.formatEther(balance));
-  };
+  }, [
+    account,
+    chainId,
+    data.ethAmount,
+    library?.connection.url,
+    library?.provider,
+  ]);
 
   const handleSubmit = async () => {
     setLoading(true);
 
-    // await updateDoc(doc(db, "projects", router.query.id), {
-    //   users: arrayUnion(account),
-    // })
-    //   .then(() => {
-    //     // setIsRegistered(true);
-    //     // axios.post("/api/project/delete", {
-    //     //   projectId: router.query.id,
-    //     // });
-    //   })
-    //   .catch((err) => console.log(err));
+    await updateDoc(doc(db, "projects", router.query.id), {
+      users: arrayUnion(account),
+    })
+      .then(() => {
+        // setIsRegistered(true);
+        // axios.post("/api/project/delete", {
+        //   projectId: router.query.id,
+        // });
+      })
+      .catch((err) => console.log(err));
 
     // Creating members
 
@@ -72,7 +78,14 @@ const UserRegister = ({ data }) => {
         await updateDoc(docRef, {
           creator: arrayUnion(data.creator),
           amount: "5",
-        });
+        })
+          .then(() => {
+            toast.success("Awesome! thanks for supporting");
+          })
+          .catch((err) => {
+            console.error(err);
+            toast.error("Something went wrong");
+          });
       } else {
         await setDoc(docRef, {
           creator: arrayUnion(data.creator),
@@ -115,15 +128,21 @@ const UserRegister = ({ data }) => {
     } else {
       setIsFunctionLoading((prev) => ({ ...prev, nftFunction: false }));
     }
-  }, [account]);
+  }, [
+    account,
+    data.contractAddress,
+    data.ethAmount,
+    data?.users,
+    hasEnoughETH,
+    isNFTOwned,
+  ]);
 
   return (
-    <div className="max-w-lg mx-auto p-4 mt-8 bg-gray-100 space-y-8">
+    <div className="max-w-lg mx-auto p-4 mt-2 border-t-4 border-green-400 bg-green-100 space-y-8 text-black">
       <p className="text-md font-medium">{data.name}</p>
       <p className="text-sm font-normal">{data.description}</p>
 
       <div className="w-full h-96 md:h-auto md:w-48">
-        <p className="text-black text-center mb-4 bg-red-500">{data.name}</p>
         <Image
           src={data.profileImage}
           alt="hero image"
@@ -145,11 +164,7 @@ const UserRegister = ({ data }) => {
                   {validForRegistration.hasETH &&
                   validForRegistration.hasNFT ? (
                     <div className="mt-8">
-                      {loading ? (
-                        <Loader />
-                      ) : (
-                        <button onClick={handleSubmit}>Become a member</button>
-                      )}
+                      <button onClick={handleSubmit}>Become a member</button>
                     </div>
                   ) : (
                     <div className="mt-8">

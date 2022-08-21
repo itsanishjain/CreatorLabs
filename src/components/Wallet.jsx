@@ -21,18 +21,31 @@ const Wallet = () => {
   };
 
   return (
-    <div className="space-y-10 max-w-lg mx-auto  shadow-md rounded-md p-8">
+    <div className="space-y-10 max-w-lg mx-auto shadow-md rounded-md p-8 bg-black text-white">
       {!account ? (
         <div className="flex flex-col space-y-4">
-          <button onClick={() => connectWallet("injected")}>MetaMask</button>
-          <button onClick={() => connectWallet("walletConnect")}>
+          <button
+            className="text-white border-2 border-white"
+            onClick={() => connectWallet("injected")}
+          >
+            MetaMask
+          </button>
+          <button
+            className="text-white border-2 border-white"
+            onClick={() => connectWallet("walletConnect")}
+          >
             WalletConnect
           </button>
         </div>
       ) : (
         <>
           <p>{truncateAddress(account)}</p>
-          <button onClick={disconnect}>Disconnect</button>
+          <button
+            className="text-white border-2 border-white"
+            onClick={disconnect}
+          >
+            Disconnect
+          </button>
         </>
       )}
     </div>
