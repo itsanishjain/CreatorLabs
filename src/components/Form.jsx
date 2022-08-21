@@ -75,19 +75,11 @@ const Form = () => {
       "profileImage"
     );
 
-    // const image2 = await uploadFile(
-    //   `projects/${docID}`,
-    //   imageFiles.bannerImageFile,
-    //   "bannerImage"
-    // );
-
     await setDoc(docRef, {
       ...formValues,
       profileImage: image1,
-      // bannerImage: image2,
     })
       .then(() => {
-        axios.post(`/api/project/create`, { account });
         toast.success("Project Created Successfully");
         router.push(`/dashboard/${docID}/settings`);
       })

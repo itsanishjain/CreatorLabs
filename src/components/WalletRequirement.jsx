@@ -32,7 +32,6 @@ const WalletRequirement = ({ data }) => {
     await updateDoc(doc(db, "projects", data.id), formValues)
       .then(() => {
         toast.success("Wallet requirements updateded");
-        axios.post("/api/project/update", { ...data, ...formValues });
       })
       .catch((err) => {
         console.log(err);

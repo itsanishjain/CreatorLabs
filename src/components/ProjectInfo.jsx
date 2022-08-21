@@ -80,7 +80,6 @@ const ProjectInfo = ({ data }) => {
       .then(() => {
         setProject(updatedProject);
         toast.success("Project Updated Successfully");
-        axios.post("/api/project/update", updatedProject);
       })
       .catch((err) => {
         console.log(err);

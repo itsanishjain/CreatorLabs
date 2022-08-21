@@ -4,7 +4,6 @@ import { getDoc, doc } from "firebase/firestore";
 
 import { db } from "../../../src/utils/firebase";
 import { UserContext } from "../../../src/context/UserContext";
-import { redis, setKey } from "../../../src/utils/redis";
 import ProjectInfo from "../../../src/components/ProjectInfo";
 import RegisterUserList from "../../../src/components/RegisterUserList";
 import WalletRequirement from "../../../src/components/WalletRequirement";
@@ -73,23 +72,12 @@ const Settings = ({ data }) => {
 
 export const getServerSideProps = async (ctx) => {
   const { id } = ctx.params;
-  var isRedisWorking = true;
-
-  const cacheRef = `project:${id}`;
-
-  const cachedData = await redis
-    .get(`project:${id}`)
-    .then((res) => JSON.parse(res))
-    .catch(() => (isRedisWorking = false));
-
-  if (isRedisWorking && cachedData) return { props: { data: cachedData } };
 
   let data = {};
 
   await getDoc(doc(db, "projects", id))
     .then(async (res) => {
       data = { id: res.id, ...res.data() };
-      if (isRedisWorking) await setKey(cacheRef, data);
     })
     .catch((err) => err);
 

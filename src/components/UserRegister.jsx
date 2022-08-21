@@ -7,7 +7,6 @@ import {
   updateDoc,
   arrayUnion,
   setDoc,
-  collection,
   getDoc,
 } from "firebase/firestore";
 
@@ -97,9 +96,6 @@ const UserRegister = ({ data }) => {
     })
       .then(() => {
         setIsRegistered(true);
-        // axios.post("/api/project/delete", {
-        //   projectId: router.query.id,
-        // });
       })
       .catch((err) => console.log(err));
 
