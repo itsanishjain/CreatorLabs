@@ -81,7 +81,7 @@ const UserRegister = ({ data }) => {
       .wait()
       .then(() => {
         setStaking(false);
-        toast.success("You have successfully minted an Allowlist NFT");
+        // toast.success("You have successfully minted an Allowlist NFT");
       })
       .catch((error) => {
         console.log(error);
@@ -92,16 +92,16 @@ const UserRegister = ({ data }) => {
   const handleSubmit = async () => {
     setLoading(true);
 
-    // await updateDoc(doc(db, "projects", router.query.id), {
-    //   users: arrayUnion(account),
-    // })
-    //   .then(() => {
-    //     // setIsRegistered(true);
-    //     // axios.post("/api/project/delete", {
-    //     //   projectId: router.query.id,
-    //     // });
-    //   })
-    //   .catch((err) => console.log(err));
+    await updateDoc(doc(db, "projects", router.query.id), {
+      users: arrayUnion(account),
+    })
+      .then(() => {
+        setIsRegistered(true);
+        // axios.post("/api/project/delete", {
+        //   projectId: router.query.id,
+        // });
+      })
+      .catch((err) => console.log(err));
 
     // Creating members
 
@@ -127,7 +127,8 @@ const UserRegister = ({ data }) => {
           creator: arrayUnion(data.creator),
           amount: "5",
         })
-          .then(() => {
+          .then(async () => {
+            await stakeMatic();
             toast.success("Awesome! thanks for supporting");
           })
           .catch((err) => {
