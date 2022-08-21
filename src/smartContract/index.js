@@ -1,5 +1,5 @@
-export const address = "0x1ae68a6a776c61981a4682c2f67004fdf5dc221d";
-export const abi = [
+export const contractAddress = "0x19B1BD8a2da022B2b85d007e35b66a7fe4e22e54";
+export const contractAbi = [
   {
     inputs: [
       {
@@ -230,6 +230,13 @@ export const abi = [
   {
     inputs: [],
     name: "renounceOwnership",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "reset",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",

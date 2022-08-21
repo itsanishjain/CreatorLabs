@@ -21,15 +21,18 @@ const ActivatePass = () => {
       <p className="text-xl text-center">Activate Pass</p>
       <div className="w-full md:w-1/2 p-1">
         <div className="w-full h-auto overflow-hidden object-cover">
-          <Image src={allowlistNFTImage} alt="hero image" />
+          {/* <Image src={allowlistNFTImage} alt="hero image" /> */}
+          <div className="bg-gradient-to-b from-green-500 w-92 h-64 text-center">
+            <span className="text-black text-2xl font-bold ">StakeLabs</span>
+          </div>
         </div>
       </div>
-      {allowlistNFT.isActivated ? (
+      {!allowlistNFT.isActivated ? (
         <p className="font-mono text-xl text-green-400">Activated</p>
       ) : !allowlistNFT.isChainIdWrong ? (
         <Mint />
       ) : (
-        <p>Please connect to Cronos Mainnet [Beta]</p>
+        <p>Please connect to Goerli Testnet</p>
       )}
     </div>
   );

@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect, useCallback } from "react";
 import { useWeb3React } from "@web3-react/core";
 import { Contract, providers } from "ethers";
 
@@ -6,6 +6,8 @@ import { abi } from "../smartContract";
 import { connectors, RPC_NETWORK_URLS } from "../utils/connectors";
 import { ALLOWLIST_CONTRACT } from "../utils/constants";
 import Loader from "../components/Loader";
+
+const CHAIN_ID = 5;
 
 export const UserContext = createContext();
 
@@ -23,52 +25,51 @@ export const UserContextProvider = ({ children }) => {
     deactivate();
   };
 
-  const isNFTOwned = async (
-    currentUserAccount,
-    contractAddress,
-    checkChainId = true
-  ) => {
-    console.log({ chainId });
+  const isNFTOwned = useCallback(
+    async (currentUserAccount, contractAddress, checkChainId = true) => {
+      console.log({ chainId });
 
-    // if (checkChainId && chainId !== 80001 && chainId !== 137)
-    if (checkChainId && chainId !== 137)
-      return {
-        isActivated: false,
-        isChainIdWrong: true,
-      };
+      // if (checkChainId && chainId !== 80001 && chainId !== 137)
+      if (checkChainId && chainId !== CHAIN_ID)
+        return {
+          isActivated: false,
+          isChainIdWrong: true,
+        };
 
-    if (library.connection.url !== "metamask") {
-      library.provider.http.connection.url = RPC_NETWORK_URLS[chainId];
-    }
+      if (library.connection.url !== "metamask") {
+        library.provider.http.connection.url = RPC_NETWORK_URLS[chainId];
+      }
 
-    const provider = await library.provider;
-    const web3Provider = new providers.Web3Provider(provider);
+      const provider = await library.provider;
+      const web3Provider = new providers.Web3Provider(provider);
 
-    const contract = new Contract(
-      contractAddress,
-      abi,
-      web3Provider.getSigner()
-    );
+      const contract = new Contract(
+        contractAddress,
+        abi,
+        web3Provider.getSigner()
+      );
 
-    const contractCode = await web3Provider.getCode(contractAddress);
+      const contractCode = await web3Provider.getCode(contractAddress);
 
-    console.log({ contractAddress });
-    console.log({ contractCode });
+      console.log({ contractAddress });
+      console.log({ contractCode });
 
-    // This might return true for different chains as well
-    if (contractCode === "0x") {
-      console.log(`NFT Contract does not exist in this chain: ${chainId}`);
-      return { isActivated: false, isChainIdWrong: false };
-    }
+      // This might return true for different chains as well
+      if (contractCode === "0x") {
+        console.log(`NFT Contract does not exist in this chain: ${chainId}`);
+        return { isActivated: false, isChainIdWrong: false };
+      }
 
-    return await contract
-      .balanceOf(currentUserAccount)
-      .then((res) => ({
-        isActivated: parseInt(res) !== 0,
-        isChainIdWrong: false,
-      }))
-      .catch(() => ({ isActivated: false, isChainIdWrong: true }));
-  };
+      return await contract
+        .balanceOf(currentUserAccount)
+        .then((res) => ({
+          isActivated: parseInt(res) !== 0,
+          isChainIdWrong: false,
+        }))
+        .catch(() => ({ isActivated: false, isChainIdWrong: true }));
+    },
+    [chainId, library?.connection.url, library?.provider]
+  );
 
   useEffect(() => {
     activate(connectors[localStorage.getItem("provider")]).then(() => {
@@ -80,7 +81,7 @@ export const UserContextProvider = ({ children }) => {
     if (!account) return;
 
     // isNFTOwned(account, ALLOWLIST_CONTRACT).then((res) => setAllowlistNFT(res));
-  }, [account, library]);
+  }, [account, isNFTOwned, library]);
 
   return (
     <UserContext.Provider

@@ -1,8 +1,7 @@
 import { useEffect, useState, useContext, useCallback } from "react";
 import Image from "next/image";
-import axios from "axios";
 import { useRouter } from "next/router";
-import { providers, utils } from "ethers";
+import { providers, Contract, utils } from "ethers";
 import {
   doc,
   updateDoc,
@@ -15,6 +14,8 @@ import {
 import { db } from "../utils/firebase";
 import { UserContext } from "../context/UserContext";
 import { INFURA_RINKEBY_URL } from "../utils/constants";
+import { contractAbi, contractAddress } from "../smartContract";
+
 import Wallet from "./Wallet";
 import Loader from "./Loader";
 import toast from "react-hot-toast";
@@ -25,6 +26,8 @@ const UserRegister = ({ data }) => {
 
   const [loading, setLoading] = useState(false);
   const [isRegistered, setIsRegistered] = useState();
+  const [staking, setStaking] = useState(false);
+
   const [validForRegistration, setValidForRegistration] = useState({
     hasETH: true,
     hasNFT: true,
@@ -54,19 +57,51 @@ const UserRegister = ({ data }) => {
     library?.provider,
   ]);
 
+  const stakeMatic = async () => {
+    setStaking(true);
+
+    if (library.connection.url !== "metamask") {
+      library.provider.http.connection.url = RPC_NETWORK_URLS[chainId];
+    }
+
+    const provider = await library.provider;
+    const web3Provider = new providers.Web3Provider(provider);
+
+    const contract = new Contract(
+      contractAddress,
+      contractAbi,
+      web3Provider.getSigner()
+    );
+
+    const tx = await contract.stake(data.creator, {
+      value: utils.parseEther("0.00002"),
+    });
+
+    await tx
+      .wait()
+      .then(() => {
+        setStaking(false);
+        toast.success("You have successfully minted an Allowlist NFT");
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error("Something went wrong");
+      });
+  };
+
   const handleSubmit = async () => {
     setLoading(true);
 
-    await updateDoc(doc(db, "projects", router.query.id), {
-      users: arrayUnion(account),
-    })
-      .then(() => {
-        // setIsRegistered(true);
-        // axios.post("/api/project/delete", {
-        //   projectId: router.query.id,
-        // });
-      })
-      .catch((err) => console.log(err));
+    // await updateDoc(doc(db, "projects", router.query.id), {
+    //   users: arrayUnion(account),
+    // })
+    //   .then(() => {
+    //     // setIsRegistered(true);
+    //     // axios.post("/api/project/delete", {
+    //     //   projectId: router.query.id,
+    //     // });
+    //   })
+    //   .catch((err) => console.log(err));
 
     // Creating members
 
@@ -79,7 +114,8 @@ const UserRegister = ({ data }) => {
           creator: arrayUnion(data.creator),
           amount: "5",
         })
-          .then(() => {
+          .then(async () => {
+            await stakeMatic();
             toast.success("Awesome! thanks for supporting");
           })
           .catch((err) => {
