@@ -35,7 +35,6 @@ const handler = async (req, res) => {
     const capitalCitiesArray = capitalQuerySnapshot.docs;
     const italianCitiesArray = italianQuerySnapshot.docs;
 
-
     console.log({ capitalCitiesArray });
     console.log({ italianCitiesArray });
 
@@ -50,7 +49,8 @@ const handler = async (req, res) => {
     result.forEach((docSnapshot) => {
       console.log(docSnapshot.data());
       // return docSnapshot.data();
-      d.push(docSnapshot.data());
+      // d.push(docSnapshot.data());
+      d.push({ id: docSnapshot.id, ...docSnapshot.data() });
     });
   });
 
