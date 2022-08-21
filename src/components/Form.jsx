@@ -75,16 +75,16 @@ const Form = () => {
       "profileImage"
     );
 
-    const image2 = await uploadFile(
-      `projects/${docID}`,
-      imageFiles.bannerImageFile,
-      "bannerImage"
-    );
+    // const image2 = await uploadFile(
+    //   `projects/${docID}`,
+    //   imageFiles.bannerImageFile,
+    //   "bannerImage"
+    // );
 
     await setDoc(docRef, {
       ...formValues,
       profileImage: image1,
-      bannerImage: image2,
+      // bannerImage: image2,
     })
       .then(() => {
         axios.post(`/api/project/create`, { account });
@@ -102,60 +102,61 @@ const Form = () => {
 
   return (
     <form
-      className='flex flex-col max-w-2xl mx-auto mt-4 space-y-8 p-4 bg-gray-50 shadow-md rounded-md'
-      onSubmit={handleSubmit}>
+      className="flex flex-col max-w-2xl mx-auto mt-4 space-y-8 p-4 shadow-md rounded-md"
+      onSubmit={handleSubmit}
+    >
       <Input
-        inputTagType='smallInput'
-        placeholder='Name of your project'
+        inputTagType="smallInput"
+        placeholder="Name of your project"
         onChange={handleChange}
         value={formValues.name}
-        name='name'
+        name="name"
         required={true}
       />
 
-      <Input
+      {/* <Input
         inputTagType='largeInput'
         placeholder='Description'
         onChange={handleChange}
         value={formValues.description}
         name='description'
         required={true}
-      />
+      /> */}
 
       <p>Profile Image</p>
 
       <input
-        name='profileImage'
+        name="profileImage"
         onChange={handleImageChange}
-        accept='image/*'
-        type='file'
-        className='mt-3 block text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 cursor-pointer'
+        accept="image/*"
+        type="file"
+        className="mt-3 block text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 cursor-pointer"
         required={true}
       />
 
       {formValues.profileImage && (
-        <div className='w-full h-96 md:h-auto md:w-48'>
+        <div className="w-full h-96 md:h-auto md:w-48">
           <Image
             src={formValues.profileImage}
-            alt='profile image'
-            width='100%'
-            height='100%'
-            layout='responsive'
+            alt="profile image"
+            width="100%"
+            height="100%"
+            layout="responsive"
           />
         </div>
       )}
 
-      <p>Banner Image</p>
+      {/* <p>Banner Image</p> */}
 
-      <input
-        name='bannerImage'
+      {/* <input
+        name="bannerImage"
         onChange={handleImageChange}
-        accept='image/*'
-        type='file'
-        className='form-control mt-3 block text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100'
+        accept="image/*"
+        type="file"
+        className="form-control mt-3 block text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
         required={true}
-      />
-      {formValues.bannerImage && (
+      /> */}
+      {/* {formValues.bannerImage && (
         <div className='w-full h-96 md:h-auto md:w-48'>
           <Image
             src={formValues.bannerImage}
@@ -165,9 +166,13 @@ const Form = () => {
             layout='responsive'
           />
         </div>
-      )}
+      )} */}
 
-      {loading ? <Loader /> : <button>Create</button>}
+      {loading ? (
+        <Loader />
+      ) : (
+        <button className="bg-green-300 text-black text-xl">Create</button>
+      )}
     </form>
   );
 };

@@ -29,16 +29,16 @@ const Navigation = () => {
     else body.classList.remove(...customBodyStyle);
 
     // Sticky strick
-    const customStyle = ["sticky-nav", "fixed"];
+    // const customStyle = ["sticky-nav", "fixed"];
     // Check for User Register page, There is no Navbar
-    window.onscroll = () => {
-      if (window.scrollY > 80) navRef.current?.classList.add(...customStyle);
-      else navRef.current?.classList.remove(...customStyle);
-    };
+    // window.onscroll = () => {
+    //   if (window.scrollY > 80) navRef.current?.classList.add(...customStyle);
+    //   else navRef.current?.classList.remove(...customStyle);
+    // };
   }, [toggle]);
 
   return (
-    <nav ref={navRef} className="w-full top-0 z-20 text-md font-medium">
+    <nav ref={navRef} className="w-full mt-4 text-lg text-white font-medium">
       <div className="items-center px-4 max-w-screen-xl mx-auto lg:flex lg:px-8">
         <div className="flex items-center justify-between py-3 lg:py-4 lg:block">
           <Link href="/">
@@ -109,7 +109,7 @@ const Navigation = () => {
                 <li className="mt-8 lg:mt-0 mb-8 lg:mb-0">
                   <Link href="/login">
                     <a
-                      className="py-3 px-4 text-center text-white bg-orange-500 hover:bg-orange-700 rounded-md shadow block lg:inline"
+                      className="py-3 px-4 text-center text-white bg-gradient-to-r from-green-400 to-green-600 rounded-md shadow block lg:inline"
                       onClick={disconnect}
                     >
                       Disconnect
@@ -123,7 +123,7 @@ const Navigation = () => {
             <div className="flex-1">
               <ul className="justify-center items-center space-y-8 lg:flex lg:space-x-6 lg:space-y-0">
                 {navigation.map((item, idx) => (
-                  <li key={idx} className="text-gray-600 hover:text-orange-600">
+                  <li key={idx} className="text-white font-light">
                     <Link href={item.path}>
                       <a onClick={handleToggle}>{item.title}</a>
                     </Link>

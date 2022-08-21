@@ -22,7 +22,9 @@ const handler = async (req, res) => {
     .then(async (snapshot) => {
       const data = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
 
-      if (isRedisWorking) await setKey(cacheRef, data);
+      console.log(data);
+
+      // if (isRedisWorking) await setKey(cacheRef, data);
 
       return res.json(data);
     })

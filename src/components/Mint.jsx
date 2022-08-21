@@ -3,7 +3,7 @@ import { providers, Contract, utils } from "ethers";
 import toast from "react-hot-toast";
 
 import { UserContext } from "../context/UserContext";
-import { allowlistABI } from "../smartContract/allowlistABI";
+// import { allowlistABI } from "../smartContract/allowlistABI";
 import { RPC_NETWORK_URLS } from "../utils/connectors";
 import { ALLOWLIST_CONTRACT } from "../utils/constants";
 
@@ -43,7 +43,7 @@ const Mint = () => {
   };
 
   return (
-    <div className='mt-8 w-full p-4 shadow-md rounded-sm bg-gray-200'>
+    <div className="mt-8 w-full p-4 shadow-md rounded-sm bg-gray-200">
       {!minting ? <button onClick={mintNFT}>Mint</button> : "Minting......."}
     </div>
   );
