@@ -84,40 +84,18 @@ const UserRegister = ({ data }) => {
 
   const handleSubmit = async () => {
     setLoading(true);
-    // Creating members
 
-    console.log({ account });
-    const docRef = doc(db, "membership", account);
-    await getDoc(docRef).then(async (snapshot) => {
-      if (snapshot.data()) {
-        console.log("Member already exists");
-        await updateDoc(docRef, {
-          creator: arrayUnion(data.creator),
-          amount: "5",
-        })
-          .then(async () => {
-            await stakeMatic();
-            toast.success("Awesome! thanks for supporting");
-          })
-          .catch((err) => {
-            console.error(err);
-            toast.error("Something went wrong");
-          });
-      } else {
-        await setDoc(docRef, {
-          creator: arrayUnion(data.creator),
-          amount: "5",
-        })
-          .then(async () => {
-            await stakeMatic();
-            toast.success("Awesome! thanks for supporting");
-          })
-          .catch((err) => {
-            console.error(err);
-            toast.error("Something went wrong");
-          });
-      }
-    });
+    await updateDoc(doc(db, "projects", router.query.id), {
+      users: arrayUnion(account),
+    })
+      .then(async () => {
+        await stakeMatic();
+        toast.success("Awesome! thanks for supporting");
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Something went wrong");
+      });
 
     setLoading(false);
   };
@@ -170,42 +148,21 @@ const UserRegister = ({ data }) => {
         />
       </div>
       <div>
-        {isRegistered ? (
-          "Already Registered"
-        ) : (
-          <>
-            <Wallet />
-            {account &&
-              (!isFunctionLoading.ethFunction &&
-              !isFunctionLoading.nftFunction ? (
-                <div>
-                  {validForRegistration.hasETH &&
-                  validForRegistration.hasNFT ? (
-                    <div className="mt-8">
-                      <button onClick={handleSubmit}>Become a member</button>
-                    </div>
-                  ) : (
-                    <div className="mt-8">
-                      {!validForRegistration.hasETH &&
-                        `Have at least ${data.ethAmount} ETH in your wallet`}
-                      {!validForRegistration.hasNFT &&
-                        `NO ${data.contractName}`}
-                      <div className="mt-8">
-                        <button className="bg-gray-500 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed">
-                          Become a member
-                        </button>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              ) : (
-                <Loader />
-              ))}
-          </>
-        )}
+        <>
+          <Wallet />
+          {account && (
+            <div>
+              <div className="mt-8">
+                {loading ? (
+                  <Loader />
+                ) : (
+                  <button onClick={handleSubmit}>Become a member</button>
+                )}
+              </div>
+            </div>
+          )}
+        </>
       </div>
-
-      {loading && <Loader />}
     </div>
   );
 };
