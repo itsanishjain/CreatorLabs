@@ -2,9 +2,7 @@ import React, { createContext, useState, useEffect, useCallback } from "react";
 import { useWeb3React } from "@web3-react/core";
 import { Contract, providers } from "ethers";
 
-import { abi } from "../smartContract";
 import { connectors, RPC_NETWORK_URLS } from "../utils/connectors";
-import { ALLOWLIST_CONTRACT } from "../utils/constants";
 import Loader from "../components/Loader";
 
 const CHAIN_ID = 5;

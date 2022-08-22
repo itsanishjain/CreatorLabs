@@ -14,6 +14,7 @@ const Navigation = () => {
   const navigation = [
     { title: "Activate Pass", path: "/activate-pass" },
     { title: "Dashboard", path: "/dashboard" },
+    { title: "Explore", path: "/explore" },
     { title: "Create project", path: "/dashboard/new" },
   ];
 

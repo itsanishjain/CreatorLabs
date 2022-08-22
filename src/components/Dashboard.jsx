@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import { useRouter } from "next/router";
 import Link from "next/link";
 import React from "react";
 import Image from "next/image";
@@ -7,6 +8,7 @@ import { providers, Contract, utils } from "ethers";
 import { UserContext } from "../context/UserContext";
 import { contractAbi, contractAddress } from "../smartContract";
 const Dashboard = ({ data }) => {
+  const router = useRouter();
   const { isLoggedIn, account, library, chainId } = useContext(UserContext);
   const [earning, setEearning] = useState(0);
   const [withdraw, setWitdraw] = useState(false);
@@ -96,10 +98,10 @@ const Dashboard = ({ data }) => {
           <div className="flex flex-col md:flex-row md:space-x-2 space-y-2 md:space-y-0">
             <Link href={`/${data.id}`}>
               <a className="bg-gradient-to-r from-green-400 to-green-600 p-2 block text-white rounded-sm text-center">
-                Public Page
+                Support
               </a>
             </Link>
-            {data.creator === account && (
+            {router.pathname !== "/explore" && data.creator === account && (
               <Link href={`/dashboard/${data.id}/settings`}>
                 <a className="bg-gradient-to-r from-green-400 to-green-600 p-2 block text-white rounded-sm text-center">
                   Settings
@@ -109,31 +111,26 @@ const Dashboard = ({ data }) => {
           </div>
         </div>
       </div>
-      <div className="bg-red-500 flex justify-between">
-        <div
-          onClick={getEarnings}
-          className="bg-green-500 flex flex-col justify-between"
-        >
-          <span>Total Earnings</span>
-          <span>{earning}</span>
+      {router.pathname !== "/explore" && data.creator !== account && (
+        <div className="bg-red-500 flex justify-between">
+          <div
+            onClick={getEarnings}
+            className="bg-green-500 flex flex-col justify-between"
+          >
+            <span>Total Earnings</span>
+            <span>{earning}</span>
+          </div>
+          <div onClick={withdrawStakedToken} className="bg-pink-500">
+            <span>Withdraw Funds</span>
+            <span>{withdraw ? "DONE" : "NONE"}</span>
+          </div>
+          <div onClick={withdrawRewardToken} className="bg-blue-500">
+            <span>Witdraw Rewards</span>
+          </div>
         </div>
-        <div onClick={withdrawStakedToken} className="bg-pink-500">
-          <span>Withdraw Funds</span>
-          <span>{withdraw ? "DONE" : "NONE"}</span>
-        </div>
-        <div onClick={withdrawRewardToken} className="bg-blue-500">
-          <span>Witdraw Rewards</span>
-        </div>
-      </div>
-      <hr />
+      )}
     </div>
   );
 };
 
 export default Dashboard;
-
-// <Link href={`/dashboard/${data.id}/member`}>
-//                 <a className="bg-gradient-to-r from-green-400 to-green-600 p-2 block text-white rounded-sm text-center">
-//                   Member
-//                 </a>
-//               </Link>
