@@ -72,9 +72,9 @@ const Dashboard = ({ data }) => {
   };
 
   return (
-    <div className="m-8 mx-auto max-w-xl px-2">
+    <div className="m-8 mx-auto max-w-xl px-2 bg-white">
       <div
-        className="flex flex-col items-center bg-white rounded-lg border shadow-md md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 
+        className="flex flex-col items-center bg-white border shadow-md md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 
         dark:hover:bg-gray-700"
       >
         {/* GOLDEN CODE */}
@@ -95,12 +95,16 @@ const Dashboard = ({ data }) => {
           <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
             {data.description}
           </p>
+
           <div className="flex flex-col md:flex-row md:space-x-2 space-y-2 md:space-y-0">
-            <Link href={`/${data.id}`}>
-              <a className="bg-gradient-to-r from-green-400 to-green-600 p-2 block text-white rounded-sm text-center">
-                Support
-              </a>
-            </Link>
+            {data.creator !== account && (
+              <Link href={`/${data.id}`}>
+                <a className="bg-gradient-to-r from-green-400 to-green-600 p-2 block text-white rounded-sm text-center">
+                  Support
+                </a>
+              </Link>
+            )}
+
             {router.pathname !== "/explore" && data.creator === account && (
               <Link href={`/dashboard/${data.id}/settings`}>
                 <a className="bg-gradient-to-r from-green-400 to-green-600 p-2 block text-white rounded-sm text-center">
@@ -112,19 +116,25 @@ const Dashboard = ({ data }) => {
         </div>
       </div>
       {router.pathname !== "/explore" && data.creator !== account && (
-        <div className="bg-red-500 flex justify-between">
+        <div className="flex justify-between mt-2">
           <div
             onClick={getEarnings}
-            className="bg-green-500 flex flex-col justify-between"
+            className="w-32 h-32 cursor-pointer p-2 border-t-2 border-green-800 bg-green-200 flex flex-col justify-between text-black"
           >
             <span>Total Earnings</span>
-            <span>{earning}</span>
+            <span>{earning / 10 ** 18} SKRT</span>
           </div>
-          <div onClick={withdrawStakedToken} className="bg-pink-500">
+          <div
+            onClick={withdrawStakedToken}
+            className=" w-32 h-32 cursor-pointer p-2  border-t-2 border-green-800 bg-green-200 text-black"
+          >
             <span>Withdraw Funds</span>
-            <span>{withdraw ? "DONE" : "NONE"}</span>
+            <span>{withdraw ? "DONE" : null}</span>
           </div>
-          <div onClick={withdrawRewardToken} className="bg-blue-500">
+          <div
+            onClick={withdrawRewardToken}
+            className=" w-32 h-32 cursor-pointer  border-t-2 p-2 border-green-800 bg-green-200 text-black"
+          >
             <span>Witdraw Rewards</span>
           </div>
         </div>
