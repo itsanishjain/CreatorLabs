@@ -2,13 +2,7 @@ import { useEffect, useState, useContext, useCallback } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { providers, Contract, utils } from "ethers";
-import {
-  doc,
-  updateDoc,
-  arrayUnion,
-  setDoc,
-  getDoc,
-} from "firebase/firestore";
+import { doc, updateDoc, arrayUnion, setDoc, getDoc } from "firebase/firestore";
 
 import { db } from "../utils/firebase";
 import { UserContext } from "../context/UserContext";
@@ -90,15 +84,6 @@ const UserRegister = ({ data }) => {
 
   const handleSubmit = async () => {
     setLoading(true);
-
-    await updateDoc(doc(db, "projects", router.query.id), {
-      users: arrayUnion(account),
-    })
-      .then(() => {
-        setIsRegistered(true);
-      })
-      .catch((err) => console.log(err));
-
     // Creating members
 
     console.log({ account });

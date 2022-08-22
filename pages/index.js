@@ -3,22 +3,26 @@ import Head from "next/head";
 import Image from "next/image";
 
 import astronaut from "../src/images/astronaut.png";
+import img1 from "../public/img1.png";
+import img2 from "../public/img2.png";
+import img3 from "../public/img3.png";
+import img4 from "../public/img4.png";
 
 const App = () => (
   <div>
     <Head>
-      <title>stakeLabs</title>
-      <meta property="og:title" content="stakeLabs" />
+      <title>CreatorLabs</title>
+      <meta property="og:title" content="CreatorLabs" />
       <meta
         property="og:description"
         content="A tool that allows creator to get whitelisting for their upcoming project"
       />
       <meta property="og:type" content="website" />
-      <meta property="og:image" content="/stakeLabsNFT.jpg" />
-      <meta property="og:url" content="https://www.stakeLabs.live/" />
+      <meta property="og:image" content="/CreatorLabsNFT.jpg" />
+      <meta property="og:url" content="https://www.CreatorLabs.live/" />
       <meta property="twitter:card" content="summary_large_image" />
-      <meta property="twitter:url" content="https://www.stakeLabs.live/" />
-      <meta property="twitter:title" content="stakeLabs" />
+      <meta property="twitter:url" content="https://www.CreatorLabs.live/" />
+      <meta property="twitter:title" content="CreatorLabs" />
       <meta
         property="twitter:description"
         content="A tool that allows creator to get whitelisting for their upcoming project"
@@ -33,16 +37,16 @@ const App = () => (
         <div className="flex flex-wrap items-center sm:-mx-3">
           <div className="w-full md:w-1/2 md:px-3">
             <div className="w-full pb-6 space-y-6 sm:max-w-md lg:max-w-lg md:space-y-4 lg:space-y-8 xl:space-y-7 sm:pr-5 lg:pr-0 md:pb-0">
-              <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl md:text-4xl lg:text-5xl xl:text-6xl">
-                <span className="block xl:inline">stakeLabs</span>
+              <h1 className="text-4xl font-extrabold tracking-tight text-green-500 sm:text-5xl md:text-4xl lg:text-5xl xl:text-6xl">
+                <span className="block xl:inline">CreatorLabs</span>
               </h1>
-              <p className="mx-auto text-base text-gray-500 sm:max-w-md lg:text-xl md:max-w-3xl">
+              <p className="mx-auto text-base text-white sm:max-w-md lg:text-xl md:max-w-3xl">
                 Support you favorite content creators and earn rewards
               </p>
               <div className="relative flex flex-col sm:flex-row sm:space-x-4">
-                <Link href="/activate-pass" passHref>
-                  <a className="flex items-center w-full px-6 py-3 mb-3 text-lg text-white bg-orange-500 rounded-md sm:mb-0 hover:bg-orange-700 sm:w-auto">
-                    Buy Our NFT
+                <Link href="/explore" passHref>
+                  <a className="flex items-center w-full px-6 py-3 mb-3 text-lg text-white bg-gradient-to-r from-green-500 to-green-100 text-black rounded-md sm:mb-0 hover:bg-green-700 sm:w-auto">
+                    Explore Creators
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="w-5 h-5 ml-1"
@@ -82,7 +86,7 @@ const App = () => (
       <div className="box-border flex flex-col items-center content-center px-8 mx-auto leading-6 text-black border-0 border-gray-300 border-solid md:flex-row max-w-7xl lg:px-16">
         <div className="box-border relative w-full max-w-md px-4 mt-5 mb-4 -ml-5 text-center bg-no-repeat bg-contain border-solid md:ml-0 md:mt-0 md:max-w-none lg:mb-0 md:w-1/2 xl:pl-10">
           <Image
-            src={astronaut}
+            src={img1}
             className="p-2 pl-6 pr-5 xl:pl-16 xl:pr-20 "
             width="300px"
             height="300px"
@@ -91,25 +95,72 @@ const App = () => (
         </div>
 
         <div className="box-border order-first w-full text-black border-solid md:w-1/2 md:pl-10 md:order-none">
-          <h2 className="m-0 text-xl font-semibold leading-tight border-0 border-gray-300 lg:text-3xl md:text-2xl">
-            Roadmap
+          <h2 className="m-0 text-xl font-semibold leading-tight border-0 border-gray-300 lg:text-3xl md:text-2xl text-green-400">
+            Build a direct, meaningful connection with your audience
           </h2>
-          <p className="pt-4 pb-8 m-0 leading-7 text-gray-700 border-0 border-gray-300 sm:pr-12 xl:pr-32 lg:text-lg">
-            We&apos;re going to create a slew of tools to assist
-            creators/artists in obtaining the finest possible stakeLabs for
-            their projects.
+          <p className="pt-4 pb-8 m-0 leading-7 text-green-100 border-0 border-gray-300 sm:pr-12 xl:pr-32 lg:text-lg">
+            No ads, no trolls, no algorithms. Enjoy direct access and deeper
+            conversations with the people who matter the most.
           </p>
           <ul className="p-0 m-0 leading-6 border-0 border-gray-300 space-y-2">
             <li className="box-border relative py-1 pl-0 text-left text-gray-500 border-solid flex">
-              <span className="inline-flex items-center justify-center w-6 h-6 mr-2 text-white bg-orange-500 rounded-full">
+              <span className="inline-flex items-center justify-center w-6 h-6 mr-2 text-white bg-green-500 rounded-full">
+                <span className="text-sm font-bold">✓</span>
+              </span>
+              With CreatorLabs, its not about likes and views, you can really{" "}
+              <br />
+              connect with your fans.
+            </li>
+            <li className="box-border relative py-1 pl-0 text-left text-gray-500 border-solid flex">
+              <span className="inline-flex items-center justify-center w-6 h-6 mr-2 text-white bg-green-500 rounded-full">
+                <span className="text-sm font-bold">✓</span>
+              </span>
+              ignore the haters and focus on the positive. Id rather have 300{" "}
+              <br />
+              patrons than 3 million Instagram followers
+            </li>
+            <li className="box-border relative py-1 pl-0 text-left text-gray-500 border-solid flex">
+              <span className="inline-flex items-center justify-center w-6 h-6 mr-2 text-white bg-green-500 rounded-full">
+                <span className="text-sm font-bold">✓</span>
+              </span>
+              Adding support for multiple wallets to the login process
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section className="w-full  pt-7 pb-7 md:pt-20 md:pb-24">
+      <div className="box-border flex flex-col items-center content-center px-8 mx-auto leading-6 text-black border-0 border-gray-300 border-solid md:flex-row max-w-7xl lg:px-16">
+        <div className="box-border relative w-full max-w-md px-4 mt-5 mb-4 -ml-5 text-center bg-no-repeat bg-contain border-solid md:ml-0 md:mt-0 md:max-w-none lg:mb-0 md:w-1/2 xl:pl-10 order-last">
+          <Image
+            src={img2}
+            className="p-2 pl-6 pr-5 xl:pl-16 xl:pr-20 "
+            width="300px"
+            height="300px"
+            alt="image"
+          />
+        </div>
+
+        <div className="box-border order-first w-full text-black border-solid md:w-1/2 md:pl-10 md:order-none">
+          <h2 className="m-0 text-xl font-semibold leading-tight border-0 border-green-300 lg:text-3xl md:text-2xl text-green-400">
+            Develop a recurring income stream Stop rolling the dice of ad
+            revenue and per-stream payouts.
+          </h2>
+          <p className="pt-4 pb-8 m-0 leading-7 border-0 border-gray-300 sm:pr-12 xl:pr-32 lg:text-lg text-green-100">
+            Get recurring income through monthly payments from your patrons.
+          </p>
+          <ul className="p-0 m-0 leading-6 border-0 border-gray-300 space-y-2">
+            <li className="box-border relative py-1 pl-0 text-left text-gray-500 border-solid flex">
+              <span className="inline-flex items-center justify-center w-6 h-6 mr-2 text-white bg-green-500 rounded-full">
                 <span className="text-sm font-bold">✓</span>
               </span>
               Using Twitter and Discord to authorize
               <br />
-              projects so that users can&apos;t spam their stakeLabs
+              projects so that users can&apos;t spam their CreatorLabs
             </li>
             <li className="box-border relative py-1 pl-0 text-left text-gray-500 border-solid flex">
-              <span className="inline-flex items-center justify-center w-6 h-6 mr-2 text-white bg-orange-500 rounded-full">
+              <span className="inline-flex items-center justify-center w-6 h-6 mr-2 text-white bg-green-500 rounded-full">
                 <span className="text-sm font-bold">✓</span>
               </span>
               Filtering users with multiple accounts automatically
@@ -117,7 +168,52 @@ const App = () => (
               by keeping track of their transaction activities
             </li>
             <li className="box-border relative py-1 pl-0 text-left text-gray-500 border-solid flex">
-              <span className="inline-flex items-center justify-center w-6 h-6 mr-2 text-white bg-orange-500 rounded-full">
+              <span className="inline-flex items-center justify-center w-6 h-6 mr-2 text-white bg-green-500 rounded-full">
+                <span className="text-sm font-bold">✓</span>
+              </span>
+              Adding support for multiple wallets to the login process
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section className="w-full  pt-7 pb-7 md:pt-20 md:pb-24">
+      <div className="box-border flex flex-col items-center content-center px-8 mx-auto leading-6 text-black border-0 border-gray-300 border-solid md:flex-row max-w-7xl lg:px-16">
+        <div className="box-border relative w-full max-w-md px-4 mt-5 mb-4 -ml-5 text-center bg-no-repeat bg-contain border-solid md:ml-0 md:mt-0 md:max-w-none lg:mb-0 md:w-1/2 xl:pl-10">
+          <Image
+            src={img3}
+            className="p-2 pl-6 pr-5 xl:pl-16 xl:pr-20 "
+            width="300px"
+            height="300px"
+            alt="image"
+          />
+        </div>
+
+        <div className="box-border order-first w-full text-black border-solid md:w-1/2 md:pl-10 md:order-none">
+          <h2 className="m-0 text-xl font-semibold leading-tight border-0 border-gray-300 lg:text-3xl md:text-2xl text-green-400">
+            Take back creative control
+          </h2>
+          <p className="pt-4 pb-8 m-0 leading-7 text-green-100 border-0 border-gray-300 sm:pr-12 xl:pr-32 lg:text-lg">
+            Create what you want and what your audience loves.
+          </p>
+          <ul className="p-0 m-0 leading-6 border-0 border-gray-300 space-y-2">
+            <li className="box-border relative py-1 pl-0 text-left text-gray-500 border-solid flex">
+              <span className="inline-flex items-center justify-center w-6 h-6 mr-2 text-white bg-green-500 rounded-full">
+                <span className="text-sm font-bold">✓</span>
+              </span>
+              No ads, no trolls, no algorithms. Enjoy direct access and deeper
+            </li>
+            <li className="box-border relative py-1 pl-0 text-left text-gray-500 border-solid flex">
+              <span className="inline-flex items-center justify-center w-6 h-6 mr-2 text-white bg-green-500 rounded-full">
+                <span className="text-sm font-bold">✓</span>
+              </span>
+              You dont have to conform to popular taste or the constraints of{" "}
+              <br />
+              ad-based monetisation models.
+            </li>
+            <li className="box-border relative py-1 pl-0 text-left text-gray-500 border-solid flex">
+              <span className="inline-flex items-center justify-center w-6 h-6 mr-2 text-white bg-green-500 rounded-full">
                 <span className="text-sm font-bold">✓</span>
               </span>
               Adding support for multiple wallets to the login process

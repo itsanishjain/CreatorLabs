@@ -12,6 +12,8 @@ import { UserContext } from "../context/UserContext";
 import Input from "./Input";
 import Loader from "./Loader";
 
+import { nftDotStorage } from "../utils/helpers";
+
 const Form = () => {
   const { account, isLoggedIn } = useContext(UserContext);
 
@@ -74,6 +76,9 @@ const Form = () => {
       imageFiles.profileImageFile,
       "profileImage"
     );
+
+    const metadata = await nftDotStorage(imageFiles.profileImageFile);
+    console.log("METADATA", metadata.url);
 
     await setDoc(docRef, {
       ...formValues,

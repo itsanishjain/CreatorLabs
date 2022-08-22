@@ -11,8 +11,8 @@ import WalletRequirement from "../../../src/components/WalletRequirement";
 const Tab = ({ tabName, data }) => {
   const tab = {
     projectInfo: <ProjectInfo data={data} />,
-    walletRequirement: <WalletRequirement data={data} />,
-    registerUserList: <RegisterUserList users={data.users} />,
+    // walletRequirement: <WalletRequirement data={data} />,
+    // registerUserList: <RegisterUserList users={data.users} />,
   };
 
   return <>{tab[tabName]}</>;
@@ -42,14 +42,14 @@ const Settings = ({ data }) => {
 
   return (
     <div className="mt-8">
-      <ul className="flex mb-8 max-w-3xl mx-auto ">
+      <ul className="flex mb-8 max-w-3xl mx-auto p-2 w-64 ">
         <li
           onClick={() => setActiveTab("projectInfo")}
           className="flex-1 mr-2  cursor-pointer text-black"
         >
           <a className={getClassNames("projectInfo")}>Project Info</a>
         </li>
-        <li
+        {/* <li
           onClick={() => setActiveTab("walletRequirement")}
           className="flex-1 mr-2  cursor-pointer text-black"
         >
@@ -62,7 +62,7 @@ const Settings = ({ data }) => {
           className="flex-1 mr-2 cursor-pointer text-black"
         >
           <a className={getClassNames("registerUserList")}>Registered Users</a>
-        </li>
+        </li> */}
       </ul>
 
       <Tab tabName={activeTab} data={data} />

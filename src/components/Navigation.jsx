@@ -12,9 +12,9 @@ const Navigation = () => {
   const navRef = useRef();
 
   const navigation = [
-    { title: "Activate Pass", path: "/activate-pass" },
-    { title: "Dashboard", path: "/dashboard" },
+    // { title: "Activate Pass", path: "/activate-pass" },
     { title: "Explore", path: "/explore" },
+    { title: "Dashboard", path: "/dashboard" },
     { title: "Create project", path: "/dashboard/new" },
   ];
 
@@ -44,7 +44,7 @@ const Navigation = () => {
         <div className="flex items-center justify-between py-3 lg:py-4 lg:block">
           <Link href="/">
             <a className="mx-auto text-xl font-black leading-none text-gray-900 select-none flex">
-              <span className="text-green-500">StakeLabs</span>
+              <span className="text-green-500">CreatorLabs</span>
             </a>
           </Link>
           <div className="lg:hidden">

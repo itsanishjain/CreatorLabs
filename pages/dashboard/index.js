@@ -35,7 +35,6 @@ const DashboardPage = () => {
       {data.map((d, index) => (
         <Dashboard key={index} data={d} />
       ))}
-      {/* <pre className="bg-red-500">{(null, 2, JSON.stringify(data))}</pre> */}
     </div>
   );
 };
