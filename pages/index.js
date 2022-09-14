@@ -63,7 +63,7 @@ const App = () => (
                   </a>
                 </Link>
                 <a
-                  href="https://youtu.be/QssdpvEeokk"
+                  href="https://vimeo.com/741964359?embedded=true&source=vimeo_logo&owner=182980018"
                   target="_blank"
                   rel="noreferrer"
                   className="flex items-center px-6 py-3 text-gray-500 bg-gray-100 rounded-md hover:bg-gray-200 hover:text-gray-600"
