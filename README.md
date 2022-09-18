@@ -1,3 +1,7 @@
+## Winner for Devpost hackathon
+
+https://devpost.com/software/creatorlabs
+
 ## Inspiration
 I came across so many really good content creators, I learn from them every day like smart contract programmers, fireship, and many more and I am all into web3 so I try to found out something that is decentralized as web3 and more powerful than Pateron, cause Patreon takes good chuck of creators money i.e is not very "web3 and for the community" so I decided to build "CreatorLabs" which allows creators to create pages and allows there users to stake on there content/themself and for the user, this is also fun because now they can support their creators and take part in learning to earn using very cool features of DEFI. Here users stake on their creator and earn SKRT reward tokens and use them for many more perks on our roadmap.
 
