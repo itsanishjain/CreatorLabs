@@ -1,8 +1,7 @@
-import React, { createContext, useState, useEffect, useCallback } from "react";
+import React, { createContext, useState, useEffect } from "react";
 import { useWeb3React } from "@web3-react/core";
-import { Contract, providers } from "ethers";
 
-import { connectors, RPC_NETWORK_URLS } from "../utils/connectors";
+import { connectors } from "../utils/connectors";
 import Loader from "../components/Loader";
 
 const CHAIN_ID = 5;
@@ -23,52 +22,6 @@ export const UserContextProvider = ({ children }) => {
     deactivate();
   };
 
-  const isNFTOwned = useCallback(
-    async (currentUserAccount, contractAddress, checkChainId = true) => {
-      console.log({ chainId });
-
-      // if (checkChainId && chainId !== 80001 && chainId !== 137)
-      if (checkChainId && chainId !== CHAIN_ID)
-        return {
-          isActivated: false,
-          isChainIdWrong: true,
-        };
-
-      if (library.connection.url !== "metamask") {
-        library.provider.http.connection.url = RPC_NETWORK_URLS[chainId];
-      }
-
-      const provider = await library.provider;
-      const web3Provider = new providers.Web3Provider(provider);
-
-      const contract = new Contract(
-        contractAddress,
-        abi,
-        web3Provider.getSigner()
-      );
-
-      const contractCode = await web3Provider.getCode(contractAddress);
-
-      console.log({ contractAddress });
-      console.log({ contractCode });
-
-      // This might return true for different chains as well
-      if (contractCode === "0x") {
-        console.log(`NFT Contract does not exist in this chain: ${chainId}`);
-        return { isActivated: false, isChainIdWrong: false };
-      }
-
-      return await contract
-        .balanceOf(currentUserAccount)
-        .then((res) => ({
-          isActivated: parseInt(res) !== 0,
-          isChainIdWrong: false,
-        }))
-        .catch(() => ({ isActivated: false, isChainIdWrong: true }));
-    },
-    [chainId, library?.connection.url, library?.provider]
-  );
-
   useEffect(() => {
     activate(connectors[localStorage.getItem("provider")]).then(() => {
       setIsLoading(false);
@@ -77,9 +30,7 @@ export const UserContextProvider = ({ children }) => {
 
   useEffect(() => {
     if (!account) return;
-
-    // isNFTOwned(account, ALLOWLIST_CONTRACT).then((res) => setAllowlistNFT(res));
-  }, [account, isNFTOwned, library]);
+  }, [account, library]);
 
   return (
     <UserContext.Provider
@@ -90,7 +41,6 @@ export const UserContextProvider = ({ children }) => {
         activate,
         disconnect,
         deactivate,
-        isNFTOwned,
         allowlistNFT,
         isLoggedIn: !!account,
       }}

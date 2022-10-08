@@ -1,26 +1,20 @@
 import { InjectedConnector } from "@web3-react/injected-connector";
 import { WalletConnectConnector } from "@web3-react/walletconnect-connector";
 
+import { UAuthConnector } from "@uauth/web3-react";
+
 import {
-  INFURA_MAINNET_URL,
-  INFURA_ROPSTEN_URL,
-  INFURA_RINKEBY_URL,
-  INFURA_GOERLI_URL,
   ALCHEMY_POLYGON_MAINNET_URL,
   ALCHEMY_POLYGON_MUMBAI_URL,
-} from "./constants";
+} from "./consts";
 
 const injected = new InjectedConnector({
-  supportedChainIds: [1, 3, 4, 5, 137, 80001],
+  supportedChainIds: [37, 80001],
 });
 
-const ALL_SUPPORTED_CHAIN_IDS = [1, 3, 4, 5, 137, 80001];
+const ALL_SUPPORTED_CHAIN_IDS = [37, 80001];
 
 export const RPC_NETWORK_URLS = {
-  1: INFURA_MAINNET_URL,
-  3: INFURA_ROPSTEN_URL,
-  4: INFURA_RINKEBY_URL,
-  5: INFURA_GOERLI_URL,
   137: ALCHEMY_POLYGON_MAINNET_URL,
   80001: ALCHEMY_POLYGON_MUMBAI_URL,
 };
@@ -32,4 +26,14 @@ const walletConnect = new WalletConnectConnector({
   qrcode: true,
 });
 
-export const connectors = { injected, walletConnect };
+// Uauth
+
+export const uauth = new UAuthConnector({
+  clientID: "6cdd592b-60b5-4bb5-b8aa-17f7a85f11a2",
+  redirectUri: "https://stake-labs.vercel.app",
+  // redirectUri: "http://127.0.0.1:3000",
+  scope: "openid wallet",
+  connectors: { injected, walletConnect },
+});
+
+export const connectors = { injected, walletConnect, uauth };

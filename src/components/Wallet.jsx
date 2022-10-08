@@ -36,6 +36,12 @@ const Wallet = () => {
           >
             WalletConnect
           </button>
+          <button
+            className="text-white border-2 border-white"
+            onClick={() => connectWallet("uauth")}
+          >
+            Unstoppable
+          </button>
         </div>
       ) : (
         <>
