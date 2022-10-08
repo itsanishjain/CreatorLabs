@@ -29,7 +29,7 @@ const walletConnect = new WalletConnectConnector({
 // Uauth
 
 export const uauth = new UAuthConnector({
-  clientID: "6cdd592b-60b5-4bb5-b8aa-17f7a85f11a2",
+  clientID: "ef9e6f88-01f2-4e0d-993c-7cdde094aee3",
   redirectUri: "https://stake-labs.vercel.app",
   // redirectUri: "http://127.0.0.1:3000",
   scope: "openid wallet",
