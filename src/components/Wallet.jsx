@@ -1,19 +1,22 @@
 import { useContext } from "react";
 import toast from "react-hot-toast";
 
-import { connectors } from "../utils/connectors";
+import { connectors, uauth } from "../utils/connectors";
 import { truncateAddress } from "../utils/helpers";
 import { UserContext } from "../context/UserContext";
 
 const Wallet = () => {
-  const { account, activate, disconnect } = useContext(UserContext);
+  const { account, activate, disconnect, UD, getUD } = useContext(UserContext);
 
   const connectWallet = async (walletName) => {
     let isCancelled = false;
     await activate(connectors[walletName], () => {
       toast.error("Connection Rejected");
       isCancelled = true;
+    }).then(() => {
+      if (walletName === "uauth") getUD();
     });
+
     if (isCancelled) return;
 
     localStorage.setItem("provider", walletName);
@@ -45,7 +48,7 @@ const Wallet = () => {
         </div>
       ) : (
         <>
-          <p>{truncateAddress(account)}</p>
+          <p>{UD ? UD : truncateAddress(account)}</p>
           <button
             className="text-white border-2 border-white"
             onClick={disconnect}
